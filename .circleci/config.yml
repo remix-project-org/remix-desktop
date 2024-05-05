@@ -17,15 +17,6 @@ jobs:
           fingerprints:
               - "SHA256:Ansmdmjb2W/xQd1WGTn5CdamVp+V4ayHbfYmtHltntc"
       - gh/setup
-      - run:
-          name: set sefault repo
-          command: gh config set default_repository remix-project-org/remix-desktop
-      - run:
-          name: Authenticate gh with GitHub
-          command: gh auth login --hostname github.com --with-ssh
-      - run:
-          name: Create Release
-          command: gh release create v2.0.0
 
   build:
     docker:
