@@ -8,6 +8,25 @@ orbs:
   browser-tools: circleci/browser-tools@1.4.4
   win: circleci/windows@5.0
 jobs:
+  gh:
+    docker:
+      - image: circleci/node:14
+    steps:
+      - fingerprints:
+            - "SHA256:Ansmdmjb2W/xQd1WGTn5CdamVp+V4ayHbfYmtHltntc"
+      - run:
+          name: Install gh
+          command: sudo apt-get install gh
+      - run:
+          name: set sefault repo
+          command: gh config set default_repository remix-project-org/remix-desktop
+      - run:
+          name: Authenticate gh with GitHub
+          command: gh auth login --hostname github.com --with-ssh
+      - run:
+          name: Create Release
+          command: gh release create v2.0.0
+
   build:
     docker:
       - image: cimg/node:20.0.0-browsers
@@ -727,6 +746,7 @@ workflows:
   build_all:
     unless: << pipeline.parameters.run_flaky_tests >>
     jobs:
+      - gh
       - build
       - build-desktop:
           filters:
