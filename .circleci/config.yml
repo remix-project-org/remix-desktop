@@ -12,13 +12,18 @@ jobs:
   gh:
     docker:
       - image: cimg/node:20.0.0-browsers
+    working_directory: ~/remix-project
     steps:
+      - checkout
       - add_ssh_keys:
           fingerprints:
               - "SHA256:Ansmdmjb2W/xQd1WGTn5CdamVp+V4ayHbfYmtHltntc"
       - gh/install
       - run:
-          name: set sefault repo
+          name: remotes
+          command: git remote -v
+      - run:
+          name: see help
           command: gh help
 
   build:
