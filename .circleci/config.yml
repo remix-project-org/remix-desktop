@@ -23,8 +23,11 @@ jobs:
           name: remotes
           command: git remote -v
       - run:
-          name: see help
-          command: gh help
+          name: add remote
+          command: git remote add project https://github.com/remix-project-org/remix-desktop
+      - run:
+          name: set default
+          command: gh repo set-default https://github.com/remix-project-org/remix-desktop 
 
   build:
     docker:
