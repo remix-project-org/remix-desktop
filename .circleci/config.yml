@@ -10,10 +10,11 @@ orbs:
 jobs:
   gh:
     docker:
-      - image: circleci/node:14
+      - image: cimg/node:20.0.0-browsers
     steps:
-      - fingerprints:
-            - "SHA256:Ansmdmjb2W/xQd1WGTn5CdamVp+V4ayHbfYmtHltntc"
+      - add_ssh_keys:
+          fingerprints:
+              - "SHA256:Ansmdmjb2W/xQd1WGTn5CdamVp+V4ayHbfYmtHltntc"
       - run:
           name: Install gh
           command: sudo apt-get install gh
