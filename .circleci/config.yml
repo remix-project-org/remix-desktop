@@ -517,6 +517,9 @@ jobs:
       xlarge
     working_directory: ~/remix-project
     steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "SHA256:Ansmdmjb2W/xQd1WGTn5CdamVp+V4ayHbfYmtHltntc"
       - checkout
       - attach_workspace:
           at: .
