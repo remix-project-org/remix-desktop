@@ -16,7 +16,9 @@ jobs:
       - add_ssh_keys:
           fingerprints:
               - "SHA256:Ansmdmjb2W/xQd1WGTn5CdamVp+V4ayHbfYmtHltntc"
-      - gh/setup
+      - run:
+          name: set sefault repo
+          command: gh help
 
   build:
     docker:
