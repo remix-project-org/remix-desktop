@@ -7,6 +7,7 @@ parameters:
 orbs:
   browser-tools: circleci/browser-tools@1.4.4
   win: circleci/windows@5.0
+  gh: circleci/github-cli@2.0
 jobs:
   gh:
     docker:
@@ -15,9 +16,7 @@ jobs:
       - add_ssh_keys:
           fingerprints:
               - "SHA256:Ansmdmjb2W/xQd1WGTn5CdamVp+V4ayHbfYmtHltntc"
-      - run:
-          name: Install gh
-          command: sudo apt-get install gh
+      - gh/setup
       - run:
           name: set sefault repo
           command: gh config set default_repository remix-project-org/remix-desktop
