@@ -1,6 +1,6 @@
 # Will be released soon!
 
-# Remix Desktop Insiders
+# Remix Desktop
 
 **Remix Desktop** is an Electron version of Remix IDE.  It works on Linux, Windows, & Macs.
 
