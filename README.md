@@ -1,4 +1,4 @@
-# Will be released soon!
+# Now released!
 
 # Remix Desktop
 
