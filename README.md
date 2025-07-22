@@ -10,6 +10,12 @@ The app will automatically update itself when there is a new release.
 
 Download the appropriate release for your OS: https://github.com/remix-project-org/remix-desktop/releases
 
+## 🖥️ Download
+
+<!-- DOWNLOAD_LINKS_START -->
+* 🔄 Fetching latest release...
+<!-- DOWNLOAD_LINKS_END -->
+
 To find out more about Remix IDE - please go to [ethereum/remix-project](https://github.com/ethereum/remix-project) - or to see it in action, go to [remix.ethereum.org](https://remix.ethereum.org).
 
 ## About Remix Desktop
