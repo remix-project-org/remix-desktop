@@ -30,16 +30,24 @@ jobs:
           echo "APPIMG_URL=$APPIMG" >> $GITHUB_ENV
           echo "DEB_URL=$DEB" >> $GITHUB_ENV
 
-      - name: Update README.md
+      - name: Update README.md safely with awk
         run: |
-          START="<!-- DOWNLOAD_LINKS_START -->"
-          END="<!-- DOWNLOAD_LINKS_END -->"
+          LINKS=$(cat <<EOF
+          * 🪟 [Windows]($WIN_URL)
+          * 🍎 [macOS (M-series)]($MAC_URL)
+          * 🐧 [Linux AppImage]($APPIMG_URL)
+          * 📦 [Linux .deb]($DEB_URL)
+          EOF
+          )
 
-          LINKS="* 🪟 [Windows]($WIN_URL)\n* 🍎 [macOS (M-series)]($MAC_URL)\n* 🐧 [Linux AppImage]($APPIMG_URL)\n* 📦 [Linux .deb]($DEB_URL)"
-          ESCAPED_LINKS=$(echo -e "$LINKS" | sed 's/[\/&]/\\&/g')
+          awk -v new_content="$LINKS" '
+            BEGIN { inside = 0 }
+            /<!-- DOWNLOAD_LINKS_START -->/ { print; print new_content; inside = 1; next }
+            /<!-- DOWNLOAD_LINKS_END -->/ { inside = 0 }
+            !inside
+          ' README.md > README.new.md
 
-          sed -i "/$START/,/$END/{//!d; /$START/a $ESCAPED_LINKS" README.md
-
+          mv README.new.md README.md
       - name: Commit and push if changed
         run: |
           git config user.name "github-actions"
