@@ -2,7 +2,7 @@ name: Update README with latest release
 
 on:
   schedule:
-    - cron: '0 8 * * *'  # Daily at 08:00 UTC
+    - cron: '0 8 * * *'
   workflow_dispatch:
 
 jobs:
@@ -10,21 +10,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Fetch latest release info
-        id: release
-        uses: octokit/request-action@v2.x
-        with:
-          route: GET /repos/remix-project-org/remix-desktop/releases/latest
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Extract asset URLs
+      - name: Fetch latest release info with curl
         run: |
-          echo "${{ steps.release.outputs.data }}" > release.json
+          curl -sL -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            https://api.github.com/repos/remix-project-org/remix-desktop/releases/latest > release.json
 
+      - name: Extract download URLs
+        run: |
           WIN=$(jq -r '.assets[] | select(.name | endswith(".exe")) | .browser_download_url' release.json)
           MAC=$(jq -r '.assets[] | select(.name | test("mac.*arm64.*\\.dmg$")) | .browser_download_url' release.json)
           APPIMG=$(jq -r '.assets[] | select(.name | endswith(".AppImage")) | .browser_download_url' release.json)
@@ -35,7 +30,7 @@ jobs:
           echo "APPIMG_URL=$APPIMG" >> $GITHUB_ENV
           echo "DEB_URL=$DEB" >> $GITHUB_ENV
 
-      - name: Update README
+      - name: Update README.md
         run: |
           START="<!-- DOWNLOAD_LINKS_START -->"
           END="<!-- DOWNLOAD_LINKS_END -->"
@@ -45,10 +40,10 @@ jobs:
 
           sed -i "/$START/,/$END/{//!d; /$START/a $ESCAPED_LINKS" README.md
 
-      - name: Commit changes
+      - name: Commit and push if changed
         run: |
           git config user.name "github-actions"
           git config user.email "actions@github.com"
           git add README.md
-          git commit -m "Update README with latest release download links" || echo "No changes to commit"
+          git commit -m "Update README with latest release links" || echo "No changes"
           git push
