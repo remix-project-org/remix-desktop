@@ -14,7 +14,7 @@ Download the appropriate release for your OS: https://github.com/remix-project-o
 
 <!-- DOWNLOAD_LINKS_START -->
 * 🪟 [Windows](https://github.com/remix-project-org/remix-desktop/releases/download/v1.1.5/Remix-Desktop-Setup-1.1.5.exe)
-* 🍎 [macOS (M-series)] (https://github.com/remix-project-org/remix-desktop/releases/download/v1.1.5/Remix-Desktop-1.1.5-arm64.dmg)
+* 🍎 [macOS M-series](https://github.com/remix-project-org/remix-desktop/releases/download/v1.1.5/Remix-Desktop-1.1.5-arm64.dmg)
 * 🐧 [Linux AppImage](https://github.com/remix-project-org/remix-desktop/releases/download/v1.1.5/Remix-Desktop-1.1.5.AppImage)
 * 📦 [Linux .deb](https://github.com/remix-project-org/remix-desktop/releases/download/v1.1.5/remixdesktop_1.1.5_amd64.deb)
 <!-- DOWNLOAD_LINKS_END -->
