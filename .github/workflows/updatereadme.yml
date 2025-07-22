@@ -1,0 +1,54 @@
+name: Update README with latest release
+
+on:
+  schedule:
+    - cron: '0 8 * * *'  # Daily at 08:00 UTC
+  workflow_dispatch:
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Fetch latest release info
+        id: release
+        uses: octokit/request-action@v2.x
+        with:
+          route: GET /repos/remix-project-org/remix-desktop/releases/latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract asset URLs
+        run: |
+          echo "${{ steps.release.outputs.data }}" > release.json
+
+          WIN=$(jq -r '.assets[] | select(.name | endswith(".exe")) | .browser_download_url' release.json)
+          MAC=$(jq -r '.assets[] | select(.name | test("mac.*arm64.*\\.dmg$")) | .browser_download_url' release.json)
+          APPIMG=$(jq -r '.assets[] | select(.name | endswith(".AppImage")) | .browser_download_url' release.json)
+          DEB=$(jq -r '.assets[] | select(.name | endswith(".deb")) | .browser_download_url' release.json)
+
+          echo "WIN_URL=$WIN" >> $GITHUB_ENV
+          echo "MAC_URL=$MAC" >> $GITHUB_ENV
+          echo "APPIMG_URL=$APPIMG" >> $GITHUB_ENV
+          echo "DEB_URL=$DEB" >> $GITHUB_ENV
+
+      - name: Update README
+        run: |
+          START="<!-- DOWNLOAD_LINKS_START -->"
+          END="<!-- DOWNLOAD_LINKS_END -->"
+
+          LINKS="* 🪟 [Windows]($WIN_URL)\n* 🍎 [macOS (M-series)]($MAC_URL)\n* 🐧 [Linux AppImage]($APPIMG_URL)\n* 📦 [Linux .deb]($DEB_URL)"
+          ESCAPED_LINKS=$(echo -e "$LINKS" | sed 's/[\/&]/\\&/g')
+
+          sed -i "/$START/,/$END/{//!d; /$START/a $ESCAPED_LINKS" README.md
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add README.md
+          git commit -m "Update README with latest release download links" || echo "No changes to commit"
+          git push
