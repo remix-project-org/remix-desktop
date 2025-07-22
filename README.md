@@ -13,7 +13,7 @@ Download the appropriate release for your OS: https://github.com/remix-project-o
 ## 🖥️ Download
 
 <!-- DOWNLOAD_LINKS_START -->
-* 🔄 Fetching latest release...
+* [https://github.com/remix-project-org/remix-desktop/releases/download/v1.1.5/Remix-Desktop-1.1.5-arm64.dmg]
 <!-- DOWNLOAD_LINKS_END -->
 
 To find out more about Remix IDE - please go to [ethereum/remix-project](https://github.com/ethereum/remix-project) - or to see it in action, go to [remix.ethereum.org](https://remix.ethereum.org).
