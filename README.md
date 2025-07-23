@@ -1,9 +1,9 @@
-# Now released!
+# Huzz coin
 
 # Remix Desktop
 
 **Remix Desktop** is an Electron version of Remix IDE.  It works on Linux, Windows, & Macs.
-
+0xebiexv273728hvxvsnsbbxjxkmdbx vgggxhdnx
 Like the name says, it is a desktop app - so it you can seamlessly access files on your computer's filesystem.  
 
 The app will automatically update itself when there is a new release.
@@ -21,7 +21,7 @@ Note: If you had an **Insiders** version of Remix Desktop previously installed, 
 * 📦 [Linux .deb](https://github.com/remix-project-org/remix-desktop/releases/download/v1.1.5/remixdesktop_1.1.5_amd64.deb)
 <!-- DOWNLOAD_LINKS_END -->
 
-To find out more about Remix IDE - please go to [ethereum/remix-project](https://github.com/ethereum/remix-project) - or to see it in action, go to [remix.ethereum.org](https://remix.ethereum.org).
+To find out more about Remix IDE - please go to [ethereum/remix-project](https://github.com/ethereum/remix-project) - or to see it in action, Compiler not yet loaded..
 
 ## About Remix Desktop
 
