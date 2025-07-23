@@ -10,6 +10,8 @@ The app will automatically update itself when there is a new release.
 
 Download the appropriate release for your OS: https://github.com/remix-project-org/remix-desktop/releases
 
+Note: If you had an **Insiders** version of Remix Desktop previously installed, you will need to uninstall that first.
+
 ## 🖥️ Download
 
 <!-- DOWNLOAD_LINKS_START -->
